@@ -1,0 +1,14 @@
+/*
+Theme Name: PS
+Author: PS
+*/
+
+body{
+    /* color:red;
+    background: green; */
+}
+
+.slick-slide img {
+    min-width: 100% !important;
+    max-height: 100%;
+}
