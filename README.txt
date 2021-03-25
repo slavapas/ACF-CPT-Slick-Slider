@@ -13,19 +13,20 @@ Plugins to be installed
 functions.php
 ===============
 
+
 function theme_name_scripts()
 {
-    // ======= CSS======
-    // css flexslider    
-
-    // wp_enqueue_style('css-flexslider', get_template_directory_uri() . '/assets/css/flexslider.css');
+    // ======= CSS======    
     wp_enqueue_style('css-slick-theme', get_template_directory_uri() . '/assets/css/slick-theme.css');
     wp_enqueue_style('css-slickslider', get_template_directory_uri() . '/assets/css/slick.css');
     wp_enqueue_style('css-slickslider-theme', get_template_directory_uri() . '/assets/css/slick-theme.css');
-    // css standard 
+    // css default 
     wp_enqueue_style('css-mystyle', get_stylesheet_uri());
 
     // ====== JS =========    
+    // wp_deregister_script('jquery');
+    // wp_register_script('jquery', get_template_directory_uri() . '/assets/js/jquery-3.2.1.min.js', [], null, true);
+    // wp_enqueue_script('jquery');
     wp_enqueue_script('js-slickslider', get_template_directory_uri() . '/assets/js/slick.min.js', ['jquery'], NULL, true);
     wp_enqueue_script('js-myscript', get_template_directory_uri() . '/assets/js/myscript.js', ['js-slickslider'], NULL, true);
 
@@ -56,14 +57,14 @@ $myposts = get_posts($args); ?>
         <?php if (have_rows('slider_content')) : ?>
           <?php while (have_rows('slider_content')) : the_row(); ?>
             <?php
-              $slideimage = get_sub_field('slider_image');
-              $slidetitle = get_sub_field('slider_title');
-              $slidebodycopy = get_sub_field('slider_body_copy'); ?>
-              <div class="slick-container">
-                <h4 class="info-title text-center"><?php echo $slidetitle; ?></h4>
-                <p class="description"><?php echo $slidebodycopy; ?></p>
-                <img src="<?php echo $slideimage['url']; ?>" alt="<?php echo $slideimage['alt']; ?>" />
-              </div>
+            $slideimage = get_sub_field('slider_image');
+            $slidetitle = get_sub_field('slider_title');
+            $slidebodycopy = get_sub_field('slider_body_copy'); ?>
+            <div class="slick-container">
+              <h4 class="info-title text-center"><?php echo $slidetitle; ?></h4>
+              <p class="description"><?php echo $slidebodycopy; ?></p>
+              <img src="<?php echo $slideimage['url']; ?>" alt="<?php echo $slideimage['alt']; ?>" />
+            </div>
           <?php endwhile; ?>
         <?php endif; ?>
       </div>
@@ -78,7 +79,7 @@ page.php
 ================
 
 <?php get_header(); ?>
-<?php get_template_part('template-parts/slider.php'); ?>
+<?php get_template_part('template-parts/slickslider'); ?>
 <?php get_footer(); ?>
 
 
@@ -90,11 +91,13 @@ myscript.js
 
 jQuery(document).ready(function(){
   jQuery('.slider-for').slick({
-     slidesToShow: 1,
-     slidesToScroll: 1,
-     dots: true,
-     arrows: true,
-     autoplay: true
-     });
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    dots: true,
+    arrows: true,
+    autoplay: true
+    
+  });
 });
+
 
